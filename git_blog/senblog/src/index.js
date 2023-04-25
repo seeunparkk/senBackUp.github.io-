@@ -1,17 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
+import App from './App';
+import './index.css';
 
-const port = 5000;
-const staticDir = path.join(__dirname, '../build'); // 빌드된 spa 경로, index.js를 기준으로 빌드된 리액트앱 상대경로를 path.join 두번째 인자에 넣어준다
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <Router basename={process.env.PUBLIC_URL}>
+      <App />
+    </Router>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

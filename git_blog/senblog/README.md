@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# hello react
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+react spa 만들고 github pages에 올리고 자랑하기
 
-## Available Scripts
+## gh-pages 설치
 
-In the project directory, you can run:
+```sh
+yarn add -D gh-pages
+```
 
-### `npm start`
+## package.json 수정
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```jsonc package.json
+{
+  // ...
+  "scripts": {
+    // ...
+    "deploy": "gh-pages -d build"
+  },
+  // ...
+  "homepage": "https://chinsun9.github.io/hello-react/"
+}
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- `deploy` 스크립트 추가, `homepage` 필드를 추가한다
+- 이때 `homepage`필드의 값은
+- `https://{username}.github.io/{repo}/`로 한다
 
-### `npm test`
+## Router에 basename 추가
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```jsx index.js
+ReactDOM.render(
+  <React.StrictMode>
+    <Router basename={process.env.PUBLIC_URL}>
+      <App />
+    </Router>
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+```
 
-### `npm run build`
+- 최상위 Router에 `basename={process.env.PUBLIC_URL}`을 추가한다
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 404.html 추가
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- https://github.com/rafgraph/spa-github-pages/blob/gh-pages/404.html
+- `public/404.html`을 만들고 위 내용을 추가한다
+- 이때 다른점은 `pathSegmentsToKeep` 값을 1로 한다
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## index.html 수정
 
-### `npm run eject`
+- https://github.com/rafgraph/spa-github-pages/blob/gh-pages/index.html
+- `public/index.html` head 부분에 위 `<!-- Start Single Page Apps for GitHub Pages -->` 에 해당하는 스크립트 부분을 추가한다
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## build
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+yarn build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## deploy
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+yarn deploy
+```
 
-## Learn More
+- gh-pages 브랜치가 생성되어 있고,
+- 깃허브 페이지 기능이 활성화되어있는 것을 확인할 수 있을 것이다
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 참고
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- https://github.com/rafgraph/spa-github-pages
