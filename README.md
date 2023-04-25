@@ -1,6 +1,6 @@
 # hello react
 
-react spa 만들고 github pages에 올리고 자랑하기
+react spa 만들고 github pages에 올리기
 
 ## gh-pages 설치
 
