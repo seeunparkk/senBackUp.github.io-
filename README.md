@@ -1,4 +1,4 @@
-# hello react
+# hello react with git blog
 
 react spa 만들고 github pages에 올리기
 
